@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Legal Assistant - Your Complete Legal Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 120px 0 80px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></svg>') repeat;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: #667eea;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease-out 0.4s both;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            background: #f8f9ff;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .topics-section {
+            padding: 80px 0;
+            background: #f8f9ff;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .topic-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .topic-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .topic-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .topic-title {
+            font-size: 1.3rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .topic-desc {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .chatbot-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .chatbot-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .clear-chat-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .clear-chat-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .chat-messages {
+            height: 500px;
+            overflow-y: auto;
+            padding: 2rem;
+            background: #f8f9ff;
+        }
+
+        .message {
+            margin-bottom: 1.5rem;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message-content {
+            max-width: 75%;
+            padding: 1rem 1.5rem;
+            border-radius: 20px;
+            line-height: 1.6;
+        }
+
+        .user-message .message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot-message .message-content {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .message-label {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .user-message .message-label {
+            text-align: right;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.3rem;
+        }
+
+        .user-message .message-time {
+            text-align: right;
+        }
+
+        .chat-input-container {
+            padding: 1.5rem;
+            background: white;
+            border-top: 1px solid #e0e6ff;
+        }
+
+        .chat-input-box {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e0e6ff;
+            border-radius: 50px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input:focus {
+            border-color: #667eea;
+        }
+
+        .chat-send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .chat-send-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .chat-send-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+
+        .loading {
+            display: flex;
+            gap: 5px;
+            padding: 1rem;
+        }
+
+        .loading span {
+            width: 8px;
+            height: 8px;
+            background: #667eea;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .loading span:nth-child(1) { animation-delay: -0.32s; }
+        .loading span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .quick-questions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-question-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .quick-question-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .disclaimer {
+            background: #fff3cd;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            border-left: 4px solid #ffc107;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .message-content {
+                max-width: 85%;
+            }
+
+            .chat-messages {
+                height: 400px;
+            }
+
+            .topics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-questions {
+                justify-content: center;
+            }
+
+            .chat-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">⚖️ Legal AI Assistant</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#topics">Legal Topics</a></li>
+                <li><a href="#chat">AI Chat</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI-Powered Legal Assistant</h1>
+                <p class="hero-subtitle">Get instant answers on Constitution, Laws, Rights & Legal Topics</p>
+                <a href="#chat" class="cta-button">Start Chatting Now</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="topics" class="topics-section">
+        <div class="container">
+            <h2 class="section-title">Explore Legal Topics</h2>
+            <div class="topics-grid">
+                <div class="topic-card" onclick="askQuestion('Tell me about fundamental rights in India')">
+                    <div class="topic-icon">📜</div>
+                    <div class="topic-title">Constitutional Law</div>
+                    <div class="topic-desc">Fundamental rights, duties, and constitutional provisions</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('Explain criminal law basics in India')">
+                    <div class="topic-icon">⚖️</div>
+                    <div class="topic-title">Criminal Law</div>
+                    <div class="topic-desc">IPC, CrPC, and criminal justice system</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('What are my rights as a consumer?')">
+                    <div class="topic-icon">🛡️</div>
+                    <div class="topic-title">Consumer Rights</div>
+                    <div class="topic-desc">Consumer protection and remedies</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('Explain property law and ownership rights')">
+                    <div class="topic-icon">🏠</div>
+                    <div class="topic-title">Property Law</div>
+                    <div class="topic-desc">Property rights, transfers, and inheritance</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('What is family law in India?')">
+                    <div class="topic-icon">👨‍👩‍👧</div>
+                    <div class="topic-title">Family Law</div>
+                    <div class="topic-desc">Marriage, divorce, adoption, and custody</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('Explain labor laws and workers rights')">
+                    <div class="topic-icon">👔</div>
+                    <div class="topic-title">Labor Law</div>
+                    <div class="topic-desc">Employment rights and workplace regulations</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('What is cyber law and online rights?')">
+                    <div class="topic-icon">💻</div>
+                    <div class="topic-title">Cyber Law</div>
+                    <div class="topic-desc">IT Act, data protection, and digital rights</div>
+                </div>
+                <div class="topic-card" onclick="askQuestion('Explain environmental laws in India')">
+                    <div class="topic-icon">🌿</div>
+                    <div class="topic-title">Environmental Law</div>
+                    <div class="topic-desc">Environmental protection and regulations</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="chat" class="chatbot-section">
+        <div class="container">
+            <h2 class="section-title">AI Legal Chat Assistant</h2>
+            <div class="disclaimer">
+                ⚠️ <strong>Disclaimer:</strong> This AI assistant provides general legal information for educational purposes only. It is not a substitute for professional legal advice. For specific legal matters, please consult a qualified attorney.
+            </div>
+            <div class="chatbot-container">
+                <div class="chat-header">
+                    <div class="chat-header-title">💬 Ask me about any legal topic or law</div>
+                    <button class="clear-chat-btn" onclick="clearChat()">🗑️ Clear Chat</button>
+                </div>
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-label">AI Legal Assistant</div>
+                        <div class="message-content">
+                            Hello! I'm your AI legal assistant. I can help you understand various aspects of Indian law including:<br><br>
+                            • Constitutional Law & Fundamental Rights<br>
+                            • Criminal Law (IPC, CrPC)<br>
+                            • Civil Law & Property Rights<br>
+                            • Family Law & Personal Laws<br>
+                            • Labor & Employment Law<br>
+                            • Consumer Protection<br>
+                            • Cyber Law & IT Act<br>
+                            • Tax Law & Business Law<br>
+                            • Environmental Law<br><br>
+                            Ask me anything in simple language, and I'll explain it clearly!
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-container">
+                    <div class="quick-questions">
+                        <button class="quick-question-btn" onclick="askQuestion('What is the difference between IPC and CrPC?')">IPC vs CrPC</button>
+                        <button class="quick-question-btn" onclick="askQuestion('What are my rights if arrested?')">Rights when arrested</button>
+                        <button class="quick-question-btn" onclick="askQuestion('How to file an FIR?')">How to file FIR</button>
+                        <button class="quick-question-btn" onclick="askQuestion('What is Section 498A?')">Section 498A</button>
+                        <button class="quick-question-btn" onclick="askQuestion('Explain Right to Privacy')">Right to Privacy</button>
+                    </div>
+                    <div class="chat-input-box">
+                        <input type="text" id="chatInput" class="chat-input" placeholder="Ask about any law or legal topic..." onkeypress="handleKeyPress(event)">
+                        <button class="chat-send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Comprehensive Legal Knowledge Base
+        const legalKnowledge = {
+            // Quick reference for common queries
+            'default': 'I apologize, but I don\'t have specific information on that topic in my knowledge base. However, I can provide general guidance on Indian law. Could you please rephrase your question or ask about: Fundamental Rights, Criminal Law (IPC/CrPC), Consumer Rights, Property Law, Family Law, Labor Law, or other legal topics?',
+            // Constitutional Law
+            'fundamental rights': `**Fundamental Rights in India (Articles 12-35)**
+
+The Constitution of India guarantees six fundamental rights to all citizens:
+
+**1. Right to Equality (Articles 14-18)**
+- Equality before law (Article 14)
+- No discrimination on grounds of religion, race, caste, sex, or place of birth (Article 15)
+- Equality of opportunity in public employment (Article 16)
+- Abolition of untouchability (Article 17)
+- Abolition of titles (Article 18)
+
+**2. Right to Freedom (Articles 19-22)**
+- Freedom of speech and expression
+- Freedom to assemble peacefully
+- Freedom to form associations
+- Freedom to move freely throughout India
+- Freedom to reside and settle anywhere in India
+- Freedom to practice any profession
+
+**3. Right against Exploitation (Articles 23-24)**
+- Prohibition of human trafficking and forced labor
+- Prohibition of child labor in hazardous industries
+
+**4. Right to Freedom of Religion (Articles 25-28)**
+- Freedom to profess, practice, and propagate religion
+- Freedom to manage religious affairs
+
+**5. Cultural and Educational Rights (Articles 29-30)**
+- Protection of interests of minorities
+- Right to establish educational institutions
+
+**6. Right to Constitutional Remedies (Article 32)**
+- Right to approach Supreme Court for enforcement of fundamental rights
+
+These rights can be enforced through courts and are essential for individual dignity and development.`,
+
+            'article 21': `**Article 21 - Right to Life and Personal Liberty**
+
+"No person shall be deprived of his life or personal liberty except according to procedure established by law."
+
+**Key Aspects:**
+- One of the most important fundamental rights
+- Protects human life, dignity, and personal freedom
+- Cannot be suspended even during emergency (with Article 20)
+
+**Supreme Court Interpretations:**
+Through landmark judgments, Article 21 now includes:
+- Right to live with human dignity
+- Right to privacy
+- Right to clean environment
+- Right to education
+- Right to healthcare
+- Right to food and water
+- Right to shelter
+- Right to speedy trial
+- Right against custodial torture
+- Right to legal aid
+
+**Protection:**
+The state can only deprive a person of life/liberty through:
+1. Fair legal procedure
+2. Just and reasonable law
+3. Due process of law
+
+This article is the foundation of human rights protection in India.`,
+
+            'fundamental duties': `**Fundamental Duties (Article 51A)**
+
+Added by the 42nd Amendment (1976), citizens have 11 fundamental duties:
+
+1. **Respect the Constitution** - Abide by Constitution, national flag, and national anthem
+2. **Freedom Struggle** - Cherish ideals of the freedom movement
+3. **Sovereignty & Integrity** - Uphold and protect sovereignty, unity and integrity of India
+4. **National Defense** - Defend the country and render national service when called upon
+5. **Harmony** - Promote harmony and spirit of common brotherhood
+6. **Composite Culture** - Value and preserve our composite culture
+7. **Environment** - Protect and improve natural environment (forests, lakes, rivers, wildlife)
+8. **Scientific Temper** - Develop scientific temper, humanism, and spirit of inquiry
+9. **Public Property** - Safeguard public property and abjure violence
+10. **Excellence** - Strive towards excellence in all spheres
+11. **Education** - Provide opportunities for education to children (6-14 years)
+
+**Nature:**
+- Not legally enforceable (no penalty for violation)
+- Moral obligations on citizens
+- Can be considered by courts while deciding cases`,
+
+            // Criminal Law
+            'ipc crpc difference': `**Difference Between IPC and CrPC**
+
+**IPC (Indian Penal Code, 1860)**
+- Defines what constitutes a crime
+- Lists punishments for each crime
+- Substantive law (what is the law)
+- Example: Section 302 - Murder and its punishment
+
+**CrPC (Criminal Procedure Code, 1973)**
+- Defines how criminal cases are investigated and tried
+- Procedure for arrest, bail, trial, appeals
+- Procedural law (how to implement the law)
+- Example: Section 154 - How to register FIR
+
+**Simple Analogy:**
+- IPC = Rule book (what is illegal)
+- CrPC = Instruction manual (how to handle illegal acts)
+
+**Example:**
+- IPC Section 379: Theft is punishable with imprisonment
+- CrPC Section 154: Police must register FIR when theft is reported
+- CrPC Section 156: Police can investigate without magistrate's order
+
+Both work together to deliver criminal justice in India.`,
+
+            'rights when arrested': `**Your Rights When Arrested in India**
+
+**Constitutional Rights (Article 22):**
+
+1. **Right to be Informed**
+   - Must be told grounds of arrest
+   - Must be informed of charges against you
+
+2. **Right to Legal Representation**
+   - Right to consult a lawyer of your choice
+   - Right to be defended by a lawyer
+
+3. **Right to be Produced Before Magistrate**
+   - Must be produced within 24 hours (excluding travel time)
+   - Cannot be detained beyond 24 hours without magistrate's permission
+
+**Important Rights Under CrPC:**
+
+1. **Right to Bail** (Section 436-439)
+   - Can apply for bail depending on offense
+   - Bailable offenses: Bail is your right
+   - Non-bailable offenses: Court's discretion
+
+2. **Right Against Torture** (Article 21)
+   - No custodial torture or violence
+   - Medical examination right
+
+3. **Right to Inform**
+   - Police must inform friend/relative about arrest
+
+4. **Right to Free Legal Aid**
+   - If you cannot afford a lawyer, state provides one
+
+5. **Rights of Women**
+   - Cannot be arrested after sunset/before sunrise (except in exceptional cases)
+   - Must be arrested by female police officer
+
+**What to Do:**
+✓ Stay calm and cooperate
+✓ Ask for reason of arrest
+✓ Request to contact lawyer/family
+✓ Do not sign blank papers
+✓ Request medical examination if injured`,
+
+            'file fir': `**How to File an FIR (First Information Report)**
+
+**What is FIR?**
+First Information Report - official complaint registered by police about commission of a cognizable offense.
+
+**Step-by-Step Process:**
+
+**1. Go to Police Station**
+   - Visit nearest police station
+   - Any police station can register FIR (doesn't have to be local jurisdiction)
+
+**2. Provide Information**
+   - Give details of the incident:
+     • What happened
+     • When it happened
+     • Where it happened
+     • Who was involved
+     • Any witnesses
+
+**3. Written or Oral**
+   - You can give information orally or in writing
+   - If oral, police will write it down
+
+**4. Reading and Signing**
+   - Police must read out the FIR to you
+   - You must sign it after verification
+   - Police will give you free copy
+
+**5. FIR Number**
+   - You'll receive FIR number
+   - Keep it safe for future reference
+
+**Important Points:**
+
+✓ **Free of Cost** - No fee for filing FIR
+✓ **Any Language** - Can file in any language
+✓ **Anonymous FIR** - Can file anonymously in certain cases
+✓ **Zero FIR** - If incident occurred in different jurisdiction, police must register Zero FIR
+✓ **Online FIR** - Many states allow online FIR for certain offenses
+
+**If Police Refuses:**
+1. Give written complaint
+2. Send by registered post to Superintendent of Police
+3. Approach Magistrate under Section 156(3) CrPC
+4. File complaint in court under Section 200 CrPC
+
+**When to File:**
+- As soon as possible after incident
+- Delay may affect investigation`,
+
+            'section 498a': `**Section 498A IPC - Cruelty by Husband or Relatives**
+
+**Law:**
+"Whoever, being the husband or relative of the husband of a woman, subjects such woman to cruelty shall be punished with imprisonment up to 3 years and fine."
+
+**What Constitutes Cruelty?**
+
+1. **Physical Cruelty:**
+   - Any conduct causing danger to life, limb, or health
+   - Physical violence or harm
+
+2. **Mental Cruelty:**
+   - Harassment for dowry demands
+   - Coercion to meet unlawful demands
+   - Mental torture or harassment
+
+**Key Features:**
+
+**Offense Type:** Non-bailable and cognizable
+**Punishment:** Up to 3 years imprisonment + fine
+**Who Can File:** Wife against husband or his relatives
+**Investigation:** Police can arrest without warrant
+
+**Important Points:**
+
+✓ **Dowry Harassment** - Main purpose is to protect women from dowry-related torture
+✓ **Mental Abuse** - Covers psychological torture, not just physical
+✓ **In-laws Included** - Can be filed against husband's relatives too
+✓ **Preventive** - Aims to prevent suicide or severe consequences
+
+**Criticism:**
+- Some argue it's misused
+- Supreme Court has issued guidelines against misuse
+- Police must follow proper investigation procedures
+
+**Protection for Accused:**
+- Can apply for anticipatory bail (Section 438 CrPC)
+- Right to fair investigation
+- Right to defend in court
+
+**For Complainant:**
+- Can approach police station
+- Medical evidence helps
+- Keep proof of harassment (messages, recordings if legal)
+- Can seek protection orders
+
+Note: This is a serious offense - both false complaints and genuine harassment are taken seriously by courts.`,
+
+            // More topics
+            'consumer rights': `**Consumer Rights in India**
+
+**The Consumer Protection Act, 2019 provides six basic rights:**
+
+**1. Right to Safety**
+- Protection against hazardous goods/services
+- Products must meet safety standards
+
+**2. Right to Information**
+- Complete information about product/service
+- Quality, quantity, purity, price, standards
+
+**3. Right to Choose**
+- Freedom to select from variety of products
+- Access to competitive markets
+
+**4. Right to be Heard**
+- Voice concerns and complaints
+- Right to be represented in consumer forums
+
+**5. Right to Seek Redressal**
+- Compensation for defective goods/services
+- Right to fair settlement of claims
+
+**6. Right to Consumer Education**
+- Acquire knowledge about consumer rights
+- Awareness about market practices
+
+**Where to Complain?**
+
+**1. District Consumer Forum**
+- Claims up to ₹1 crore
+
+**2. State Consumer Commission**
+- Claims between ₹1-10 crore
+- Appeals from District Forum
+
+**3. National Consumer Commission**
+- Claims above ₹10 crore
+- Appeals from State Commission
+
+**How to File Complaint:**
+1. Online: www.edaakhil.nic.in
+2. Offline: Visit consumer forum
+3. Free of cost or nominal fee
+
+**Time Limit:** Within 2 years of cause of action
+
+**Common Issues:**
+✓ Defective products
+✓ Deficiency in services
+✓ Unfair trade practices
+✓ Overcharging
+✓ False advertising`,
+
+            'property law': `**Property Law and Ownership Rights in India**
+
+**Types of Property:**
+
+**1. Movable Property**
+- Can be moved (vehicles, jewelry, furniture)
+- Governed by Sale of Goods Act, 1930
+
+**2. Immovable Property**
+- Cannot be moved (land, buildings)
+- Governed by Transfer of Property Act, 1882
+
+**Ways to Acquire Property:**
+
+1. **Purchase** - Buy through sale deed
+2. **Inheritance** - Succession laws
+3. **Gift** - Gift deed
+4. **Adverse Possession** - 12 years continuous possession
+5. **Partition** - Division among co-owners
+
+**Important Laws:**
+
+**Transfer of Property Act, 1882**
+- Rules for sale, mortgage, lease, exchange
+- Registration requirements
+- Rights and duties of buyer/seller
+
+**Registration Act, 1908**
+- Mandatory registration of property above ₹100
+- Prevents fraud
+- Creates public record
+
+**Ownership Rights:**
+
+1. **Right to Possess** - Hold and use property
+2. **Right to Use** - Utilize property as you wish
+3. **Right to Transfer** - Sell, gift, or mortgage
+4. **Right to Destroy** - Within legal limits
+
+**Documents Needed:**
+- Sale Deed (registered)
+- Property Tax receipts
+- Encumbrance Certificate
+- Title Deed
+- Mutation records
+
+Always verify property documents before purchase!`,
+
+            'right to privacy': `**Right to Privacy in India**
+
+**Constitutional Status:**
+- Recognized as Fundamental Right under Article 21
+- Declared by Supreme Court in Justice K.S. Puttaswamy vs Union of India (2017)
+
+**What it Includes:**
+1. **Personal Privacy** - Control over personal information
+2. **Physical Privacy** - Protection of personal space
+3. **Information Privacy** - Data protection rights
+4. **Communication Privacy** - Right to private communication
+
+**Key Protections:**
+✓ Cannot be searched without warrant
+✓ Phone tapping requires legal authorization
+✓ Personal data protection
+✓ Right to be left alone
+✓ Protection from surveillance
+
+**Limitations:**
+- Not absolute right
+- Can be restricted for:
+  • National security
+  • Public order
+  • Prevention of crime
+  • Public health
+
+**Related Laws:**
+- Information Technology Act, 2000
+- Aadhaar Act, 2016
+- Personal Data Protection Bill (proposed)
+
+This landmark judgment protects individual autonomy and dignity.`
+        };
+
+        // Function to get response based on query
+        function getResponse(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            // Check for keyword matches
+            for (let key in legalKnowledge) {
+                if (lowerQuery.includes(key) || key.includes(lowerQuery.split(' ')[0])) {
+                    return legalKnowledge[key];
+                }
+            }
+            
+            // Special keyword matching
+            if (lowerQuery.includes('fundamental right')) return legalKnowledge['fundamental rights'];
+            if (lowerQuery.includes('article 21')) return legalKnowledge['article 21'];
+            if (lowerQuery.includes('duties')) return legalKnowledge['fundamental duties'];
+            if (lowerQuery.includes('arrest')) return legalKnowledge['rights when arrested'];
+            if (lowerQuery.includes('fir')) return legalKnowledge['file fir'];
+            if (lowerQuery.includes('498')) return legalKnowledge['section 498a'];
+            if (lowerQuery.includes('ipc') && lowerQuery.includes('crpc')) return legalKnowledge['ipc crpc difference'];
+            if (lowerQuery.includes('consumer')) return legalKnowledge['consumer rights'];
+            if (lowerQuery.includes('property')) return legalKnowledge['property law'];
+            if (lowerQuery.includes('privacy')) return legalKnowledge['right to privacy'];
+            
+            return legalKnowledge['default'];
+        }
+
+        // Send message function
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            const sendBtn = document.getElementById('sendBtn');
+            sendBtn.disabled = true;
+            
+            // Show loading
+            showLoading();
+            
+            // Simulate AI thinking time
+            setTimeout(() => {
+                removeLoading();
+                const response = getResponse(message);
+                addMessage(response, 'bot');
+                sendBtn.disabled = false;
+                input.focus();
+            }, 800);
+        }
+
+        // Add message to chat
+        function addMessage(text, sender) {
+            const messagesDiv = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${sender}-message`;
+            
+            const label = sender === 'user' ? 'You' : 'AI Legal Assistant';
+            const time = new Date().toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' });
+            
+            // Convert markdown-style bold to HTML
+            const formattedText = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            messageDiv.innerHTML = `
+                <div class="message-label">${label}</div>
+                <div class="message-content">${formattedText.replace(/\n/g, '<br>')}</div>
+                <div class="message-time">${time}</div>
+            `;
+            
+            messagesDiv.appendChild(messageDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Show loading animation
+        function showLoading() {
+            const messagesDiv = document.getElementById('chatMessages');
+            const loadingDiv = document.createElement('div');
+            loadingDiv.className = 'message bot-message';
+            loadingDiv.id = 'loadingMessage';
+            loadingDiv.innerHTML = `
+                <div class="message-label">AI Legal Assistant</div>
+                <div class="message-content">
+                    <div class="loading">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            `;
+            messagesDiv.appendChild(loadingDiv);
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+
+        // Remove loading animation
+        function removeLoading() {
+            const loadingMsg = document.getElementById('loadingMessage');
+            if (loadingMsg) {
+                loadingMsg.remove();
+            }
+        }
+
+        // Ask pre-defined question
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        // Handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Clear chat history
+        function clearChat() {
+            if (confirm('Are you sure you want to clear the chat history?')) {
+                const messagesDiv = document.getElementById('chatMessages');
+                messagesDiv.innerHTML = `
+                    <div class="message bot-message">
+                        <div class="message-label">AI Legal Assistant</div>
+                        <div class="message-content">
+                            Chat cleared! I'm ready to answer your legal questions. Ask me anything about Indian law!
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+    </script>
