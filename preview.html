@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Auth UI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+:root{
+--bg:#0e0e11;--panel:#16161a;--border:#2a2a32;
+--accent:#c8a96e;--text:#f0ede8;--muted:#7a7880;
+--input-bg:#1c1c22;--error:#e05c5c;--success:#5cba7d;
+}
+
+body{
+min-height:100vh;display:flex;align-items:center;justify-content:center;
+background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;
+}
+
+.card{
+width:400px;background:var(--panel);border:1px solid var(--border);
+border-radius:16px;padding:35px;
+}
+
+.tabs{
+display:flex;background:var(--input-bg);border-radius:8px;
+margin-bottom:20px;position:relative;
+}
+
+.tab{
+flex:1;text-align:center;padding:10px;cursor:pointer;
+color:var(--muted);
+}
+
+.tab.active{color:var(--text)}
+
+.indicator{
+position:absolute;top:0;bottom:0;width:50%;
+background:var(--panel);border-radius:8px;
+transition:.3s;
+}
+
+.indicator.right{transform:translateX(100%)}
+
+.brand{text-align:center;margin-bottom:20px}
+.brand h1{font-family:'Playfair Display';font-size:22px}
+
+.field{margin-bottom:15px}
+
+input{
+width:100%;padding:10px;border-radius:8px;
+border:1px solid var(--border);background:var(--input-bg);
+color:var(--text);
+}
+
+input:focus{
+border-color:var(--accent);
+}
+
+.btn{
+width:100%;padding:12px;border:none;
+background:var(--accent);border-radius:8px;
+font-weight:600;cursor:pointer;margin-top:10px;
+}
+
+.section{display:none}
+.section.active{display:block}
+
+.strength{display:flex;gap:5px;margin-top:5px}
+.strength div{flex:1;height:3px;background:var(--border)}
+.weak{background:var(--error)}
+.medium{background:orange}
+.strong{background:var(--success)}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="tabs">
+<div class="indicator" id="indicator"></div>
+<div class="tab active" onclick="switchTab('login')">Login</div>
+<div class="tab" onclick="switchTab('signup')">Signup</div>
+</div>
+
+<!-- LOGIN -->
+<div class="section active" id="login">
+<div class="brand">
+<h1>Welcome Back</h1>
+<p>Sign in</p>
+</div>
+
+<div class="field">
+<input type="email" placeholder="Email">
+</div>
+
+<div class="field">
+<input type="password" id="loginPw" placeholder="Password">
+</div>
+
+<button class="btn">Login</button>
+</div>
+
+<!-- SIGNUP -->
+<div class="section" id="signup">
+<div class="brand">
+<h1>Create Account</h1>
+</div>
+
+<div class="field">
+<input type="text" placeholder="Name">
+</div>
+
+<div class="field">
+<input type="email" placeholder="Email">
+</div>
+
+<div class="field">
+<input type="password" id="signupPw" placeholder="Password" oninput="strength(this.value)">
+<div class="strength">
+<div id="s1"></div><div id="s2"></div>
+<div id="s3"></div><div id="s4"></div>
+</div>
+</div>
+
+<button class="btn">Signup</button>
+</div>
+
+</div>
+
+<script>
+function switchTab(tab){
+const indicator=document.getElementById('indicator');
+const login=document.getElementById('login');
+const signup=document.getElementById('signup');
+const tabs=document.querySelectorAll('.tab');
+
+if(tab==='login'){
+indicator.classList.remove('right');
+login.classList.add('active');
+signup.classList.remove('active');
+}else{
+indicator.classList.add('right');
+signup.classList.add('active');
+login.classList.remove('active');
+}
+
+tabs.forEach((t,i)=>{
+t.classList.toggle('active',(tab==='login'&&i===0)||(tab==='signup'&&i===1))
+});
+}
+
+function strength(val){
+let score=0;
+if(val.length>=8)score++;
+if(/[A-Z]/.test(val))score++;
+if(/[0-9]/.test(val))score++;
+if(/[^A-Za-z0-9]/.test(val))score++;
+
+const segs=['s1','s2','s3','s4'];
+
+segs.forEach((id,i)=>{
+let el=document.getElementById(id);
+el.className='';
+if(i<score){
+el.classList.add(score<=1?'weak':score<=2?'medium':'strong');
+}
+});
+}
+</script>
+
+</body>
+</html>
